@@ -13,7 +13,7 @@ contenga la cadena : "201504100 " .
 
 #### Herramientas Utilizadas
 - Lenguaje : Node JS Javascript
-- Librerias request para realizar llamadas HTTP
+- Libreria request para realizar llamadas HTTP
 
 #### ¿Como ejecutar ?
 INDEX : Tarea1.js
@@ -24,6 +24,14 @@ INDEX : Tarea1.js
 
 #### Metodos Utilizados
 1. crearContacto
--- @Param : id
---- Identificador del contacto para crear el contacto
--- Crea un nuevo contacto
+    - id
+    - Identificador del contacto para crear el contacto
+    - Crea un nuevo contacto
+    
+2. listarContactos
+   - filtrado
+     -Cadena a buscar en los nombres de contactos
+   - Listar todos los contactos que cumplan con la condicion del filtro
+3. operacionesTarea1
+   - Metodo Principal
+   - Crea 10 contactos que incluyen la cadena 201504100 y los lista.
