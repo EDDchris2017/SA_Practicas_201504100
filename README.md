@@ -21,3 +21,9 @@ INDEX : Tarea1.js
 - clonar el Repositorio de la branch "Tarea1"
 - Comando "npm install" para instalar las dependencias
 - Comando "node Tarea1.js" para crear los contactos y listarlos con el filtro de la cadena "201504100"
+
+#### Metodos Utilizados
+1. crearContacto
+-- @Param : id
+--- Identificador del contacto para crear el contacto
+-- Crea un nuevo contacto
