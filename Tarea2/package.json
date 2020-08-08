@@ -1,7 +1,7 @@
 {
-  "name": "tarea1_201504100",
+  "name": "tarea2_201504100",
   "version": "1.0.0",
-  "description": "Practica 1 Laboratorio Software Avanzado Segundo Semestre 2020",
+  "description": "Practicas Laboratorio Software Avanzado Segundo Semestre 2020",
   "main": "main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.19.2",
     "request": "^2.88.0"
   }
 }

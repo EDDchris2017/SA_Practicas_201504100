@@ -1,7 +1,28 @@
-var request = require("request");
+/**
+ * Practica2
+ * Parte1
+ * Usar credenciales client_credentials and token Bearer
+ */
 
+ // ============================ LIBRERIAS ===========================
+ const axios = require('axios').default
 
 /**
+ * Obtener Token bearer con credenciales
+ */
+ function getToken(){
+    let parametros = {
+        method: 'post',
+        url: 'http://YOUR-SITE/index.php?option=token&api=oauth2'
+    }
+
+    axios(parametros)
+    .then( function (response) {
+
+    });
+ }
+
+ /**
  * Crea un nuevo contacto
  * @param {Nombre del contacto junto con el nombre de carnet} id 
  */
@@ -56,17 +77,3 @@ async function listarContactos(filtrado)
         }
     });
 }
-
-// ------------------------- TAREA 1 ---------------------
-async function operacionesTarea1()
-{
-    //Insertar 10 Contactos
-    for (let num = 1; num <= 10; num++) { 
-        await crearContacto(num);
-    }
-    //Listar Contactos
-    await listarContactos('201504100');
-}
-
-// EJECUTAR COMANDOS
-operacionesTarea1();
