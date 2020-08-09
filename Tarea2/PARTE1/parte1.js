@@ -1,26 +1,37 @@
 /**
  * Practica2
  * Parte1
- * Usar credenciales client_credentials and token Bearer
+ * Usar credenciales client_credentials y token Bearer
  */
 
  // ============================ LIBRERIAS ===========================
  const axios = require('axios').default
+ var token_acceso = "";
 
 /**
  * Obtener Token bearer con credenciales
  */
- function getToken(){
+ async function getToken(){
     let parametros = {
         method: 'post',
-        url: 'http://YOUR-SITE/index.php?option=token&api=oauth2'
+        url: 'https://api.softwareavanzado.world/index.php?option=token&api=oauth2',
+        data: {
+            grant_type: 'client_credentials',
+            client_id: 'sa',
+            client_secret: 'fb5089840031449f1a4bf2c91c2bd2261d5b2f122bd8754ffe23be17b107b8eb103b441de3771745'
+        }
     }
 
-    axios(parametros)
-    .then( function (response) {
-
+    return new Promise(resolve => {
+        axios(parametros)
+        .then( function (response) {
+            resolve(response.data.access_token)
+        })
+        .catch( function (error) {
+            console.log(error)
+        });
     });
- }
+}
 
  /**
  * Crea un nuevo contacto
@@ -28,26 +39,26 @@
  */
 async function crearContacto(id)
 {
-    let nombre = 'contacto'+id+'_201504100'
+    let nombre = 'contacto_'+id+'_parte1_201504100'
     // Formato de envio JSON
     let envio_insertar = {
-        method: 'POST',
-        url: ' https://api.softwareavanzado.world/index.php?webserviceClient=administrator&webserviceVersion=1.0.0&option=contact&api=hal',
-        json: true,
-        body: {
+        method: 'post',
+        url: ' https://api.softwareavanzado.world/index.php?webserviceClient=administrator&webserviceVersion=1.0.0&option=contact&api=hal'
+            + '&access_token=' + token_acceso,
+        data: {
             name: nombre
         },
     }
-    request(envio_insertar,function (error,response,body){
-        if (error) throw new Error(error)
-        if ( response.statusCode == 200 || response.statusCode == 201)
-        {
-            console.log("Contacto " + nombre + "creado !!")
-        }else
-        {
+
+    return new Promise(resolve => {
+        axios(envio_insertar)
+        .then( function (response) {
+            console.log("Contacto " + nombre + " creado !!")
+        })
+        .catch( function (error){
             console.log("Error al crear el contacto " + nombre)
-        }
-        
+            console.log(error)
+        });
     });
 }
 
@@ -59,21 +70,39 @@ async function crearContacto(id)
 async function listarContactos(filtrado)
 {
     let opcion_listar = {
-        method: 'GET',
-        json:true,
-        rejectUnauthorized: false,
+        method: 'get',
         url: 'https://api.softwareavanzado.world/index.php?webserviceClient=administrator&webserviceVersion=1.0.0&option=contact' +
             '&filter[search]='+filtrado +
+            '&access_token=' + token_acceso +
             '&api=Hal',
     };
-    request(opcion_listar, function (error, response, body) {
-        if (error) throw new Error(error);
-        if (response.statusCode == 200) {
-            console.log("------- CONTACTOS -------");
-            console.log("TOTAL CONTACTOS = " + body.totalItems)
-            console.log(body._embedded);
-        } else {
-            console.log("Error al mostrar Contactos");
-        }
-    });
+    return new Promise(resolve => {
+        axios(opcion_listar)
+        .then( function (response) {
+            console.log(response.data._embedded);
+        })
+        .catch( function (error){
+            console.log("Error al listar contactos " + nombre)
+        });
+    })
 }
+
+/**
+ * Realizar instrucciones para Practica 2 parte1
+ */
+async function parte1Practica2()
+{
+    // Obtener token de acceso
+    token_acceso = await getToken(); 
+
+    //Insertar 10 Contactos
+    for (let num = 1; num <= 10; num++) { 
+        crearContacto(num);
+    }
+
+    // listar contactos
+    listarContactos('parte1_201504100')
+}
+
+// EJECUTAR COMANDOS
+parte1Practica2();
