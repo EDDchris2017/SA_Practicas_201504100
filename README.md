@@ -2,8 +2,8 @@
 ## Segundo Semestre 2020
 ## Christopher Lopez 201504100
 
-### Tarea 1 
-===
+### TAREA 1 
+----------------------------------------
 
 #### Descripcion del Proyecto
 
@@ -25,7 +25,7 @@ INDEX : Tarea1.js
 #### Metodos Utilizados
 1. crearContacto
     - id
-    - Identificador del contacto para crear el contacto
+     - Identificador del contacto para crear el contacto
     - Crea un nuevo contacto
     
 2. listarContactos
@@ -35,3 +35,56 @@ INDEX : Tarea1.js
 3. operacionesTarea1
    - Metodo Principal
    - Crea 10 contactos que incluyen la cadena 201504100 y los lista.
+   
+ ### TAREA 2
+-------------------------------------------
+#### Descripcion del Proyecto
+
+Manejo de credenciales para consumir los servicios de listar y crear nuevos contactos,
+- PARTE 1, Servicio REST token bearer
+- PARTE 2, Servicio SOAP basic credentials
+
+#### Herramientas Utilizadas
+- Lenguaje : Node JS Javascript
+- Libreria AXIOS 0.19.22 para realizar llamadas HTTP
+
+#### ¿Como ejecutar ?
+Tener instalado node js y npm en un sistema operativo linux o windows yclonar el Repositorio de la branch "Tarea2"
+luego ejecutar el comando "npm install" para instalar las dependecias.
+- PARTE 1
+    - Ubicarse en la carpeta "PARTE1" 
+    -  Ejecutar el comando "node parte1.js
+- PARTE 2
+    - Ubicarse en la carpeta "PARTE2"
+    - Ejecutar el comando "node parte2.js"
+
+#### Formato de Envio XML en Soap
+Para enviar los parametros necesarios para llamar a los metodos de listar y crear contactos el formato XML utilizado fue:
+- Metodo readList
+```xml
+<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:adm="https://api.softwareavanzado.world/media/redcore/webservices/joomla/administrator.contact.1.0.0.wsdl">
+    <soap:Header/>
+    <soap:Body>
+       <adm:readList>
+          <filterSearch>filtrado</filterSearch>
+       </adm:readList>
+    </soap:Body>
+ </soap:Envelope>
+```
+- Metodo Create
+```xml
+<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:adm="https://api.softwareavanzado.world/media/redcore/webservices/joomla/administrator.contact.1.0.0.wsdl">
+    <soap:Header/>
+    <soap:Body>
+       <adm:create>
+          <name>nombre</name>
+       </adm:create>
+    </soap:Body>
+ </soap:Envelope>
+```
+
+#### Metodos Utilizados
+Se agrego el metodo getToken()
+1. getToken()
+- Usado para obtener el token bearer usando client credentials en la parte1
+    
